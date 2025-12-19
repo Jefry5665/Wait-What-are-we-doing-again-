@@ -13,8 +13,7 @@
         }
         header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 20px;
             padding: 20px;
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(8px);
@@ -23,20 +22,10 @@
             text-decoration: none;
             color: #0077cc;
             font-weight: bold;
-            font-size: 18px;
         }
         .hero {
             text-align: center;
             padding: 80px 20px;
-        }
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-        .hero p {
-            font-size: 20px;
-            max-width: 700px;
-            margin: 0 auto;
         }
         .section {
             padding: 50px 20px;
@@ -52,241 +41,198 @@
             font-size: 14px;
             color: #555;
         }
-
-        /* Reveal animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(60px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-            background: linear-gradient(135deg, #ffffff, #f0f7ff);
-        }
-        .reveal > * {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .reveal.active > * {
-            animation: stagger 0.6s ease forwards;
-        }
-        .reveal.active > *:nth-child(1) { animation-delay: 0.1s; }
-        .reveal.active > *:nth-child(2) { animation-delay: 0.2s; }
-        .reveal.active > *:nth-child(3) { animation-delay: 0.3s; }
-        .reveal.active > *:nth-child(4) { animation-delay: 0.4s; }
-        .reveal.active > *:nth-child(5) { animation-delay: 0.5s; }
-        @keyframes stagger {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-away {
-            opacity: 0.25;
-            transition: opacity 0.6s ease;
-        }
-        #match-game {
-            transition: transform 0.6s ease, box-shadow 0.6s ease;
-        }
-        #match-game.active {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
+        .reveal { opacity: 0; transform: translateY(60px); transition: 0.8s; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
 <header>
-    <a href="https://www.cdc.gov/ncbddd/adhd/index.html" target="_blank">CDC ADHD Info</a>
-    <a href="https://www.nimh.nih.gov/health/topics/attention-deficit-hyperactivity-disorder-adhd" target="_blank">NIMH ADHD Info</a>
-    <a href="https://www.additudemag.com/adhd-symptoms-in-children-adults/" target="_blank">ADDitude Magazine</a>
+    <a href="https://www.cdc.gov/ncbddd/adhd/index.html" target="_blank">CDC ADHD</a>
+    <a href="https://www.nimh.nih.gov/health/topics/attention-deficit-hyperactivity-disorder-adhd" target="_blank">NIMH ADHD</a>
+    <a href="https://www.additudemag.com/adhd-symptoms-in-children-adults/" target="_blank">ADDitude</a>
 </header>
 
 <div class="hero">
-    <h1>Understanding ADHD</h1>
-    <p>A friendly, animated site built to explain ADHD clearly and engagingly.</p>
+    <h1>Wait—what were we doin again?</h1>
+    <p>Understanding ADHD through facts, strengths, and interactive learning.</p>
 </div>
 
 <div class="section reveal">
     <h2>What is ADHD?</h2>
-    <p>ADHD affects attention, impulse control, and energy levels — and also comes with creativity and unique strengths.</p>
+    <p>ADHD affects attention, impulse control, and energy levels. It also comes with creativity and unique strengths.</p>
 </div>
 
 <div class="section reveal">
     <h2>Common Signs & Symptoms</h2>
     <ul>
-        <li>Difficulty focusing or staying on task</li>
-        <li>Forgetfulness and disorganization</li>
-        <li>Impulsivity or restlessness</li>
-        <li>Hyperfocus on interesting activities</li>
+        <li>Difficulty focusing</li>
+        <li>Forgetfulness</li>
+        <li>Impulsivity</li>
+        <li>Restlessness or hyperfocus</li>
     </ul>
 </div>
 
 <div class="section reveal">
     <h2>ADHD Strengths</h2>
     <ul>
-        <li>Creativity and out-of-the-box thinking</li>
-        <li>High energy and enthusiasm</li>
-        <li>Strong passion for interests</li>
-        <li>Problem-solving abilities</li>
+        <li>Creativity</li>
+        <li>High energy</li>
+        <li>Problem-solving skills</li>
     </ul>
 </div>
 
 <div class="section reveal">
     <h2>How to Help People with ADHD</h2>
     <ul>
-        <li>Break tasks into smaller steps</li>
-        <li>Use reminders and visual cues</li>
-        <li>Encourage movement breaks</li>
-        <li>Be patient and supportive</li>
+        <li>Break tasks into smaller, manageable steps</li>
+        <li>Use reminders, planners, or visual schedules</li>
+        <li>Encourage movement and short breaks</li>
+        <li>Be patient, supportive, and understanding</li>
     </ul>
 </div>
 
 <div class="section reveal">
-    <h2>ADHD Learning Game: Match the Facts</h2>
-    <div id="match-game" style="display:flex; gap:40px; flex-wrap:wrap;">
+    <h2>Why ADHD Awareness Matters in Society</h2>
+    <p>
+        ADHD awareness helps reduce stigma and misunderstanding. Many people with ADHD are often labeled as lazy, careless,
+        or disruptive, when in reality their brains simply process information differently. Understanding ADHD allows
+        schools, workplaces, and communities to provide fair support and equal opportunities.
+    </p>
+    <p>
+        When society is informed about ADHD, people are more likely to receive early diagnosis, helpful accommodations,
+        and acceptance. Awareness also highlights the strengths people with ADHD bring — such as creativity, energy,
+        and innovative thinking — which benefit society as a whole.
+    </p>
+</div>
+
+<div class="section reveal">
+    <h2>Learning & Focus Games</h2>
+    <div style="display:flex; gap:40px; flex-wrap:wrap;">
         <div>
-            <h3>Facts</h3>
+            <h3>Match the Facts</h3>
             <div id="facts"></div>
+            <div id="categories"></div>
+            <p id="match-result"></p>
         </div>
         <div>
-            <h3>Categories</h3>
-            <div id="categories"></div>
+            <h3>Focus Click Game</h3>
+            <button id="click-btn">Click me</button>
+            <p>Score: <span id="click-score">0</span></p>
+            <div id="quiz-box" style="display:none;">
+                <p id="quiz-question"></p>
+                <button class="quiz-answer"></button>
+                <button class="quiz-answer"></button>
+            </div>
         </div>
     </div>
-    <p id="match-result" style="font-weight:bold;"></p>
+</div>
+
+<div class="section reveal">
+    <h2>Sources & Citations</h2>
+    <ul>
+        <li>Centers for Disease Control and Prevention (CDC) – ADHD Overview</li>
+        <li>National Institute of Mental Health (NIMH) – Attention-Deficit/Hyperactivity Disorder</li>
+        <li>ADDitude Magazine – ADHD Symptoms, Strengths, and Strategies</li>
+    </ul>
 </div>
 
 <footer>
-    Wait—what were we doin again?
+    © Civics Project – ADHD Awareness | Wait—what were we doin again?
 </footer>
 
 <script>
-    let selectedFact = null;
+// ---------- MATCH GAME ----------
+let selectedFact = null;
+let currentSet = 0;
 
-    const gameSets = [
-        {
-            facts: [
-                { text: "Often forgets items", match: "symptom" },
-                { text: "Very energetic", match: "strength" },
-                { text: "Creative thinker", match: "strength" }
-            ],
-            categories: ["symptom", "strength", "strength"]
-        },
-        {
-            facts: [
-                { text: "Use reminders", match: "strategy" },
-                { text: "Break tasks down", match: "strategy" },
-                { text: "Hyperfocus ability", match: "strength" }
-            ],
-            categories: ["strategy", "strategy", "strength"]
-        },
-        {
-            facts: [
-                { text: "Easily distracted", match: "symptom" },
-                { text: "Thinks very fast", match: "strength" },
-                { text: "Needs movement breaks", match: "strategy" }
-            ],
-            categories: ["symptom", "strength", "strategy"]
-        },
-        {
-            facts: [
-                { text: "Trouble starting tasks", match: "symptom" },
-                { text: "Strong creativity", match: "strength" },
-                { text: "Uses planners or timers", match: "strategy" }
-            ],
-            categories: ["symptom", "strength", "strategy"]
-        },
-        {
-            facts: [
-                { text: "Forgetful in daily routines", match: "symptom" },
-                { text: "Very imaginative", match: "strength" },
-                { text: "Breaks tasks into steps", match: "strategy" }
-            ],
-            categories: ["symptom", "strength", "strategy"]
-        }
-    ];
+const gameSets = [
+  {
+    facts: [
+      { text: "Often forgets items", match: "symptom" },
+      { text: "Very energetic", match: "strength" },
+      { text: "Creative thinker", match: "strength" }
+    ],
+    categories: ["symptom", "strength", "strength"]
+  },
+  {
+    facts: [
+      { text: "Use reminders", match: "strategy" },
+      { text: "Break tasks down", match: "strategy" },
+      { text: "Hyperfocus ability", match: "strength" }
+    ],
+    categories: ["strategy", "strategy", "strength"]
+  }
+];
 
-    function shuffle(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
+function shuffle(a){ return a.sort(()=>Math.random()-0.5); }
 
-    let currentSet = 0;
+function loadGameSet() {
+    const factsDiv = document.getElementById('facts');
+    const catsDiv = document.getElementById('categories');
+    factsDiv.innerHTML = '';
+    catsDiv.innerHTML = '';
 
-    function loadGameSet() {
-        const factsDiv = document.getElementById('facts');
-        const catsDiv = document.getElementById('categories');
-        const result = document.getElementById('match-result');
+    const set = gameSets[currentSet];
+    shuffle([...set.facts]).forEach(f => {
+        const b = document.createElement('button');
+        b.textContent = f.text;
+        b.dataset.match = f.match;
+        b.onclick = () => selectedFact = b;
+        factsDiv.appendChild(b);
+    });
 
-        factsDiv.innerHTML = '';
-        catsDiv.innerHTML = '';
-        result.textContent = '';
-
-        const set = gameSets[currentSet];
-        const shuffledFacts = shuffle([...set.facts]);
-        const shuffledCategories = shuffle([...set.categories]);
-
-        shuffledFacts.forEach(f => {
-            const b = document.createElement('button');
-            b.textContent = f.text;
-            b.dataset.match = f.match;
-            b.onclick = () => selectedFact = b;
-            factsDiv.appendChild(b);
-        });
-
-        shuffledCategories.forEach(c => {
-            const b = document.createElement('button');
-            b.textContent = c;
-            b.onclick = () => {
-                if (!selectedFact) return;
-                if (selectedFact.dataset.match === c) {
-                    result.textContent = 'Correct!';
-                    selectedFact.disabled = true;
-                    b.disabled = true;
-                } else {
-                    result.textContent = 'Try again';
-                }
-                selectedFact = null;
-
-                const done = [...factsDiv.children].every(btn => btn.disabled);
-                if (done) {
-                    setTimeout(() => {
-                        currentSet = (currentSet + 1) % gameSets.length;
-                        loadGameSet();
-                    }, 1000);
-                }
-            };
-            catsDiv.appendChild(b);
-        });
-    }
-
-    loadGameSet();
-
-    const reveals = document.querySelectorAll('.reveal');
-    const game = document.getElementById('match-game');
-
-    function revealOnScroll() {
-        const h = window.innerHeight;
-        reveals.forEach(el => {
-            const r = el.getBoundingClientRect();
-            if (r.top < h - 120 && r.bottom > 120) {
-                el.classList.add('active');
-                el.classList.remove('fade-away');
-            } else {
-                el.classList.remove('active');
-                el.classList.add('fade-away');
+    shuffle([...set.categories]).forEach(c => {
+        const b = document.createElement('button');
+        b.textContent = c;
+        b.onclick = () => {
+            if (selectedFact && selectedFact.dataset.match === c) {
+                selectedFact.disabled = true;
+                b.disabled = true;
             }
-        });
-        if (game) {
-            const r = game.getBoundingClientRect();
-            game.classList.toggle('active', r.top < h - 150 && r.bottom > 150);
-        }
-    }
+            if ([...factsDiv.children].every(x=>x.disabled)){
+                currentSet = (currentSet+1)%gameSets.length;
+                loadGameSet();
+            }
+        };
+        catsDiv.appendChild(b);
+    });
+}
 
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll();
+loadGameSet();
+
+// ---------- FOCUS GAME ----------
+let score = 0;
+let allow = true;
+const quiz = [
+  {q:"ADHD can affect attention.",a:["True","False"],c:0},
+  {q:"People with ADHD lack creativity.",a:["True","False"],c:1}
+];
+
+document.getElementById('click-btn').onclick = ()=>{
+  if(!allow) return;
+  score++;
+  document.getElementById('click-score').textContent = score;
+};
+
+setInterval(()=>{
+  allow = false;
+  const q = quiz[Math.floor(Math.random()*quiz.length)];
+  document.getElementById('quiz-question').textContent = q.q;
+  document.getElementById('quiz-box').style.display='block';
+  document.querySelectorAll('.quiz-answer').forEach((b,i)=>{
+    b.textContent = q.a[i];
+    b.onclick = ()=>{ if(i===q.c){ allow=true; document.getElementById('quiz-box').style.display='none'; }};
+  });
+},45000);
+
+// ---------- REVEAL ----------
+const reveals = document.querySelectorAll('.reveal');
+window.addEventListener('scroll',()=>{
+  reveals.forEach(r=>{
+    if(r.getBoundingClientRect().top < window.innerHeight-120){ r.classList.add('active'); }
+  });
+});
 </script>
 
 </body>
