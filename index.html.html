@@ -1,390 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wait—what were we doin again?</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
-            color: #333;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(8px);
-        }
-        header a {
-            text-decoration: none;
-            color: #0077cc;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-        }
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-        .hero p {
-            font-size: 20px;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .section {
-            padding: 50px 20px;
-            background: white;
-            margin: 30px auto;
-            max-width: 900px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-            color: #555;
-        }
-
-        /* Image hover animations */
-        img {
-            transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
-        }
-        img:hover {
-            transform: scale(1.06) rotate(0.5deg);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-            filter: saturate(1.2);
-        }
-
-        /* Reveal animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(60px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-            background: linear-gradient(135deg, #ffffff, #f0f7ff);
-        }
-        .reveal > * {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .reveal.active > * {
-            animation: stagger 0.6s ease forwards;
-        }
-        .reveal.active > *:nth-child(1) { animation-delay: 0.1s; }
-        .reveal.active > *:nth-child(2) { animation-delay: 0.2s; }
-        .reveal.active > *:nth-child(3) { animation-delay: 0.3s; }
-        .reveal.active > *:nth-child(4) { animation-delay: 0.4s; }
-        .reveal.active > *:nth-child(5) { animation-delay: 0.5s; }
-        @keyframes stagger {
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-away {
-            opacity: 0.25;
-            transition: opacity 0.6s ease;
-        }
-        #match-game {
-            transition: transform 0.6s ease, box-shadow 0.6s ease;
-        }
-        #match-game.active {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-    
-        /* Dopamine Cards */
-        .dopamine-section {
-            text-align: center;
-            padding: 60px 20px;
-        }
-        .dopamine-subtext {
-            color: #444;
-            margin-bottom: 30px;
-        }
-        .dopamine-cards {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-        }
-        .dopamine-card {
-            width: 200px;
-            height: 140px;
-            perspective: 1000px;
-            cursor: pointer;
-        }
-        .card-inner {
-            width: 100%;
-            height: 100%;
-            border-radius: 16px;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-            position: relative;
-        }
-        .dopamine-card.flipped .card-inner {
-            transform: rotateY(180deg);
-        }
-        .card-front,
-        .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-            font-weight: 600;
-            backface-visibility: hidden;
-        }
-        .card-front {
-            background: linear-gradient(135deg, #6ea8fe, #a5c9ff);
-            color: #fff;
-        }
-        .card-back {
-            background: #ffffff;
-            color: #333;
-            transform: rotateY(180deg);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wait—what were we doin again?</title>
+<style>
+:root{
+  --bg:#eaf3ff;
+  --card:#ffffff;
+  --primary:#4f8cff;
+  --accent:#ffd166;
+  --text:#1f2937;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 20px;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(8px);
+}
+header nav{display:flex;gap:16px;flex-wrap:wrap}
+header a{
+  text-decoration:none;
+  color:var(--primary);
+  font-weight:700;
+}
+main{max-width:1100px;margin:auto}
+.hero{
+  text-align:center;
+  padding:80px 20px 60px;
+}
+.hero h1{font-size:clamp(2.2rem,5vw,3rem)}
+.hero p{max-width:720px;margin:10px auto 0;font-size:1.1rem}
+.section{
+  background:var(--card);
+  margin:30px 16px;
+  padding:40px 20px;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+footer{
+  text-align:center;
+  padding:30px 16px;
+  font-size:.9rem;
+  color:#555;
+}
+img{
+  max-width:100%;
+  border-radius:14px;
+  transition:transform .4s ease,box-shadow .4s ease;
+}
+img:hover{transform:scale(1.05);box-shadow:0 14px 32px rgba(0,0,0,.25)}
+.reveal{opacity:0;transform:translateY(40px);transition:.8s}
+.reveal.active{opacity:1;transform:none}
+.dopamine-section{text-align:center;padding:40px 20px}
+.dopamine-cards{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+.dopamine-card{width:200px;height:140px;perspective:1000px;cursor:pointer}
+.card-inner{width:100%;height:100%;border-radius:16px;transition:.6s;transform-style:preserve-3d;position:relative}
+.dopamine-card.flipped .card-inner{transform:rotateY(180deg)}
+.card-front,.card-back{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  padding:14px;font-weight:700;border-radius:16px;backface-visibility:hidden
+}
+.card-front{background:linear-gradient(135deg,#6ea8fe,#a5c9ff);color:white}
+.card-back{background:white;transform:rotateY(180deg)}
+@media(min-width:900px){
+  .section{padding:50px}
+}
+</style>
 </head>
 <body>
-
 <header>
+  <strong>ADHD Awareness</strong>
+  <nav>
     <a href="https://www.cdc.gov/ncbddd/adhd/index.html" target="_blank">CDC ADHD</a>
     <a href="https://www.nimh.nih.gov/health/topics/attention-deficit-hyperactivity-disorder-adhd" target="_blank">NIMH ADHD</a>
-    <a href="https://www.additudemag.com/adhd-symptoms-in-children-adults/" target="_blank">ADDitude</a>
+    <a href="https://www.additudemag.com/" target="_blank">ADDitude</a>
+  </nav>
 </header>
-
-<div class="hero">
-    <h1>Understanding ADHD</h1>
-    <p>A friendly, animated site built to explain ADHD clearly and engagingly.</p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Neurodiversity_symbol.svg" alt="Neurodiversity symbol representing ADHD" style="max-width:220px; margin-top:25px;" />
-</div>
-
-<div class="section reveal">
-    <h2>What is ADHD?</h2>
-    <p>ADHD affects attention, impulse control, and energy levels — and also comes with creativity and unique strengths.</p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/ADHD_brain_diagram.png" alt="Illustration showing ADHD brain activity" style="max-width:100%; margin-top:20px; border-radius:10px;" />
-</div>
-
-<div class="section reveal">
-    <h2>Common Signs & Symptoms</h2>
-    <ul>
-        <li>Difficulty focusing or staying on task</li>
-        <li>Forgetfulness and disorganization</li>
-        <li>Impulsivity or restlessness</li>
-        <li>Hyperfocus on interesting activities</li>
-    </ul>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/ADHD_symptoms_wordcloud.png" alt="Word cloud showing ADHD symptoms" style="max-width:100%; margin-top:20px; border-radius:10px;" />
-</div>
-
-<div class="section reveal">
-    <h2>ADHD Strengths</h2>
-    <ul>
-        <li>Creativity and out-of-the-box thinking</li>
-        <li>High energy and enthusiasm</li>
-        <li>Strong passion for interests</li>
-        <li>Problem-solving abilities</li>
-    </ul>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Creative_brain_illustration.png" alt="Creative brain illustration representing ADHD strengths" style="max-width:100%; margin-top:20px; border-radius:10px;" />
-</div>
-
-<div class="section reveal">
-    <h2>How to Help People with ADHD</h2>
-    <ul>
-        <li>Break tasks into smaller steps</li>
-        <li>Use reminders and visual cues</li>
-        <li>Encourage movement breaks</li>
-        <li>Be patient and supportive</li>
-    </ul>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Checklist_icon.svg" alt="Checklist representing ADHD support strategies" style="max-width:140px; margin-top:20px;" />
-</div>
-
-<div class="section reveal">
-    <h2>Why ADHD Awareness Matters in Society</h2>
-    <p>
-        ADHD awareness helps reduce stigma and misunderstanding. Many people with ADHD are often labeled as lazy, careless,
-        or disruptive, when in reality their brains simply process information differently. Understanding ADHD allows
-        schools, workplaces, and communities to provide fair support and equal opportunities.
-    </p>
-    <p>
-        When society is informed about ADHD, people are more likely to receive early diagnosis, helpful accommodations,
-        and acceptance. Awareness also highlights the strengths people with ADHD bring — such as creativity, energy,
-        and innovative thinking — which benefit society as a whole.
-    </p>
-</div>
-
-<div class="section reveal">
-    <h2>Learning & Focus Games</h2>
-    <div style="display:flex; gap:40px; flex-wrap:wrap;">
-        <div>
-            <h3>Match the Facts</h3>
-            <div id="facts"></div>
-            <div id="categories"></div>
-            <p id="match-result"></p>
-        </div>
-        <div>
-            <h3>Focus Click Game</h3>
-            <button id="click-btn">Click me</button>
-            <p>Score: <span id="click-score">0</span></p>
-            <div id="quiz-box" style="display:none;">
-                <p id="quiz-question"></p>
-                <button class="quiz-answer"></button>
-                <button class="quiz-answer"></button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="section reveal">
-    <h2>Sources & Citations</h2>
-    <ul>
-        <li>Centers for Disease Control and Prevention (CDC) – ADHD Overview</li>
-        <li>National Institute of Mental Health (NIMH) – Attention-Deficit/Hyperactivity Disorder</li>
-        <li>ADDitude Magazine – ADHD Symptoms, Strengths, and Strategies</li>
-    </ul>
-</div>
-
-<footer>
-    © Civics Project – ADHD Awareness | Wait—what were we doin again?
-</footer>
-
-<section class="dopamine-section reveal">
-    <h2>Dopamine Cards: ADHD Quick Facts</h2>
-    <p class="dopamine-subtext">Click a card to reveal a new ADHD fact.</p>
-
-    <div class="dopamine-cards">
-        <div class="dopamine-card" onclick="flipCard(this)">
-            <div class="card-inner">
-                <div class="card-front">Click me 💡</div>
-                <div class="card-back">ADHD brains often seek novelty, which supports creativity.</div>
-            </div>
-        </div>
-
-        <div class="dopamine-card" onclick="flipCard(this)">
-            <div class="card-inner">
-                <div class="card-front">Click me 🧠</div>
-                <div class="card-back">People with ADHD can hyperfocus on things they enjoy.</div>
-            </div>
-        </div>
-
-        <div class="dopamine-card" onclick="flipCard(this)">
-            <div class="card-inner">
-                <div class="card-front">Click me ⚡</div>
-                <div class="card-back">ADHD is linked to fast thinking and problem-solving.</div>
-            </div>
-        </div>
-    </div>
+<main>
+<section class="hero reveal">
+  <h1>Wait—what were we doin again?</h1>
+  <p>Understanding ADHD through facts, strengths, and interactive learning.</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Neurodiversity_symbol.svg" alt="Neurodiversity symbol" style="max-width:220px;margin-top:24px">
 </section>
-
+<section class="section reveal">
+  <h2>What is ADHD?</h2>
+  <p>ADHD affects attention, impulse control, and energy levels, and also brings creativity and unique strengths.</p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/ADHD_symptoms_infographic.svg/640px-ADHD_symptoms_infographic.svg.png" alt="ADHD symptoms infographic">
+</section>
+<section class="section reveal">
+  <h2>Common Signs & Symptoms</h2>
+  <ul>
+    <li>Difficulty focusing or staying on task</li>
+    <li>Forgetfulness and disorganization</li>
+    <li>Impulsivity or restlessness</li>
+    <li>Hyperfocus on interesting activities</li>
+  </ul>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/ADHD_symptoms_wordcloud.png" alt="ADHD symptoms word cloud">
+</section>
+<section class="section reveal">
+  <h2>ADHD Strengths</h2>
+  <ul>
+    <li>Creativity and original thinking</li>
+    <li>High energy and enthusiasm</li>
+    <li>Strong passion for interests</li>
+    <li>Problem‑solving abilities</li>
+  </ul>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Neurodiversity_symbol.svg" alt="Neurodiversity strengths symbol" style="max-width:200px">
+</section>
+<section class="section reveal">
+  <h2>How to Help People with ADHD</h2>
+  <ul>
+    <li>Break tasks into smaller steps</li>
+    <li>Use reminders and visual cues</li>
+    <li>Encourage movement breaks</li>
+    <li>Be patient and supportive</li>
+  </ul>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Checklist_icon.svg" alt="Checklist icon" style="max-width:140px">
+</section>
+<section class="dopamine-section reveal">
+  <h2>Dopamine Cards: ADHD Quick Facts</h2>
+  <p>Click a card to reveal a fact.</p>
+  <div class="dopamine-cards">
+    <div class="dopamine-card" onclick="flipCard(this)"><div class="card-inner"><div class="card-front">Click 💡</div><div class="card-back">ADHD brains seek novelty.</div></div></div>
+    <div class="dopamine-card" onclick="flipCard(this)"><div class="card-inner"><div class="card-front">Click 🧠</div><div class="card-back">Hyperfocus is common with ADHD.</div></div></div>
+    <div class="dopamine-card" onclick="flipCard(this)"><div class="card-inner"><div class="card-front">Click ⚡</div><div class="card-back">ADHD is linked to fast problem‑solving.</div></div></div>
+  </div>
+</section>
+</main>
+<footer>
+© Civics Project – ADHD Awareness | Wait—what were we doin again?
+</footer>
 <script>
-// ---------- MATCH GAME ----------
-let selectedFact = null;
-let currentSet = 0;
-
-const gameSets = [
-  {
-    facts: [
-      { text: "Often forgets items", match: "symptom" },
-      { text: "Very energetic", match: "strength" },
-      { text: "Creative thinker", match: "strength" }
-    ],
-    categories: ["symptom", "strength", "strength"]
-  },
-  {
-    facts: [
-      { text: "Use reminders", match: "strategy" },
-      { text: "Break tasks down", match: "strategy" },
-      { text: "Hyperfocus ability", match: "strength" }
-    ],
-    categories: ["strategy", "strategy", "strength"]
-  }
-];
-
-function shuffle(a){ return a.sort(()=>Math.random()-0.5); }
-
-function loadGameSet() {
-    const factsDiv = document.getElementById('facts');
-    const catsDiv = document.getElementById('categories');
-    factsDiv.innerHTML = '';
-    catsDiv.innerHTML = '';
-
-    const set = gameSets[currentSet];
-    shuffle([...set.facts]).forEach(f => {
-        const b = document.createElement('button');
-        b.textContent = f.text;
-        b.dataset.match = f.match;
-        b.onclick = () => selectedFact = b;
-        factsDiv.appendChild(b);
-    });
-
-    shuffle([...set.categories]).forEach(c => {
-        const b = document.createElement('button');
-        b.textContent = c;
-        b.onclick = () => {
-            if (selectedFact && selectedFact.dataset.match === c) {
-                selectedFact.disabled = true;
-                b.disabled = true;
-            }
-            if ([...factsDiv.children].every(x=>x.disabled)){
-                currentSet = (currentSet+1)%gameSets.length;
-                loadGameSet();
-            }
-        };
-        catsDiv.appendChild(b);
-    });
-}
-
-loadGameSet();
-
-// ---------- FOCUS GAME ----------
-let score = 0;
-let allow = true;
-const quiz = [
-  {q:"ADHD can affect attention.",a:["True","False"],c:0},
-  {q:"People with ADHD lack creativity.",a:["True","False"],c:1}
-];
-
-document.getElementById('click-btn').onclick = ()=>{
-  if(!allow) return;
-  score++;
-  document.getElementById('click-score').textContent = score;
-};
-
-setInterval(()=>{
-  allow = false;
-  const q = quiz[Math.floor(Math.random()*quiz.length)];
-  document.getElementById('quiz-question').textContent = q.q;
-  document.getElementById('quiz-box').style.display='block';
-  document.querySelectorAll('.quiz-answer').forEach((b,i)=>{
-    b.textContent = q.a[i];
-    b.onclick = ()=>{ if(i===q.c){ allow=true; document.getElementById('quiz-box').style.display='none'; }};
-  });
-},45000);
-
-// ---------- REVEAL ----------
-const reveals = document.querySelectorAll('.reveal');
+const reveals=document.querySelectorAll('.reveal');
 window.addEventListener('scroll',()=>{
   reveals.forEach(r=>{
-    if(r.getBoundingClientRect().top < window.innerHeight-120){ r.classList.add('active'); }
-  });
+    if(r.getBoundingClientRect().top<window.innerHeight-100){r.classList.add('active')}
+  })
 });
-
-    function flipCard(card) {
-        card.classList.toggle('flipped');
-    }
+function flipCard(c){c.classList.toggle('flipped')}
 </script>
-
 </body>
 </html>
