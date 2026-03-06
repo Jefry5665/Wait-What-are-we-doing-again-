@@ -66,6 +66,8 @@ img{
 img:hover{transform:scale(1.05);box-shadow:0 14px 32px rgba(0,0,0,.25)}
 .reveal{opacity:0;transform:translateY(40px);transition:.8s}
 .reveal.active{opacity:1;transform:none}
+
+/* Dopamine cards */
 .dopamine-section{text-align:center;padding:40px 20px}
 .dopamine-cards{display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
 .dopamine-card{width:200px;height:140px;perspective:1000px;cursor:pointer}
@@ -77,6 +79,32 @@ img:hover{transform:scale(1.05);box-shadow:0 14px 32px rgba(0,0,0,.25)}
 }
 .card-front{background:linear-gradient(135deg,#6ea8fe,#a5c9ff);color:white}
 .card-back{background:white;transform:rotateY(180deg)}
+
+/* Locked state */
+.dopamine-cards.locked{
+  opacity:.4;
+  pointer-events:none;
+  filter:grayscale(0.6);
+  transition:.4s;
+}
+
+/* Quiz styles */
+.quiz-section{text-align:center}
+.quiz-question{margin:20px 0}
+.quiz-options button{
+  margin:6px;
+  padding:10px 16px;
+  border:none;
+  border-radius:10px;
+  background:var(--primary);
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+}
+.quiz-options button.correct{background:#22c55e}
+.quiz-options button.wrong{background:#ef4444}
+.quiz-feedback{margin-top:12px;font-weight:700}
+
 @media(min-width:900px){
   .section{padding:50px}
 }
@@ -97,11 +125,13 @@ img:hover{transform:scale(1.05);box-shadow:0 14px 32px rgba(0,0,0,.25)}
   <p>Understanding ADHD through facts, strengths, and interactive learning.</p>
   <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Neurodiversity_symbol.svg" alt="Neurodiversity symbol" style="max-width:220px;margin-top:24px">
 </section>
+
 <section class="section reveal">
   <h2>What is ADHD?</h2>
   <p>ADHD affects attention, impulse control, and energy levels, and also brings creativity and unique strengths.</p>
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/ADHD_symptoms_infographic.svg/640px-ADHD_symptoms_infographic.svg.png" alt="ADHD symptoms infographic">
 </section>
+
 <section class="section reveal">
   <h2>Common Signs & Symptoms</h2>
   <ul>
@@ -112,16 +142,18 @@ img:hover{transform:scale(1.05);box-shadow:0 14px 32px rgba(0,0,0,.25)}
   </ul>
   <img src="https://upload.wikimedia.org/wikipedia/commons/3/3d/ADHD_symptoms_wordcloud.png" alt="ADHD symptoms word cloud">
 </section>
+
 <section class="section reveal">
   <h2>ADHD Strengths</h2>
   <ul>
     <li>Creativity and original thinking</li>
     <li>High energy and enthusiasm</li>
     <li>Strong passion for interests</li>
-    <li>Problem‑solving abilities</li>
+    <li>Problem-solving abilities</li>
   </ul>
   <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/Neurodiversity_symbol.svg" alt="Neurodiversity strengths symbol" style="max-width:200px">
 </section>
+
 <section class="section reveal">
   <h2>How to Help People with ADHD</h2>
   <ul>
@@ -132,19 +164,93 @@ img:hover{transform:scale(1.05);box-shadow:0 14px 32px rgba(0,0,0,.25)}
   </ul>
   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Checklist_icon.svg" alt="Checklist icon" style="max-width:140px">
 </section>
-<section class="dopamine-section reveal">
-  <h2>Dopamine Cards: ADHD Quick Facts</h2>
-  <p>Click a card to reveal a fact.</p>
-  <div class="dopamine-cards">
-    <div class="dopamine-card" onclick="flipCard(this)"><div class="card-inner"><div class="card-front">Click 💡</div><div class="card-back">ADHD brains seek novelty.</div></div></div>
-    <div class="dopamine-card" onclick="flipCard(this)"><div class="card-inner"><div class="card-front">Click 🧠</div><div class="card-back">Hyperfocus is common with ADHD.</div></div></div>
-    <div class="dopamine-card" onclick="flipCard(this)"><div class="card-inner"><div class="card-front">Click ⚡</div><div class="card-back">ADHD is linked to fast problem‑solving.</div></div></div>
+
+<!-- QUIZ SECTION -->
+<section class="section quiz-section reveal">
+  <h2>Quick ADHD Quiz</h2>
+
+  <div class="quiz-question">
+    <p>1. ADHD mainly affects:</p>
+    <div class="quiz-options">
+      <button onclick="checkAnswer(this,true)">Attention and impulse control</button>
+      <button onclick="checkAnswer(this,false)">Height and weight</button>
+      <button onclick="checkAnswer(this,false)">Hair color</button>
+    </div>
+  </div>
+
+  <div class="quiz-question">
+    <p>2. One ADHD strength can be:</p>
+    <div class="quiz-options">
+      <button onclick="checkAnswer(this,false)">Lack of creativity</button>
+      <button onclick="checkAnswer(this,true)">Creative thinking</button>
+      <button onclick="checkAnswer(this,false)">No energy</button>
+    </div>
+  </div>
+
+  <div class="quiz-question">
+    <p>3. A helpful strategy is:</p>
+    <div class="quiz-options">
+      <button onclick="checkAnswer(this,false)">Ignoring tasks</button>
+      <button onclick="checkAnswer(this,true)">Breaking tasks into steps</button>
+      <button onclick="checkAnswer(this,false)">Avoiding reminders</button>
+    </div>
+  </div>
+
+  <div id="quiz-feedback" class="quiz-feedback"></div>
+</section>
+
+<!-- REACTION GAME -->
+<section class="section reveal">
+  <h2>Focus Reaction Game ⚡</h2>
+  <p>Wait for the button to turn green, then click as fast as you can!</p>
+
+  <div style="text-align:center;margin-top:20px;">
+    <button id="reactionBtn" style="
+      padding:20px 40px;
+      font-size:1.2rem;
+      border:none;
+      border-radius:14px;
+      background:#4f8cff;
+      color:white;
+      cursor:pointer;
+      transition:0.3s;
+    ">Click to Start</button>
+
+    <p id="reactionResult" style="margin-top:15px;font-weight:bold;"></p>
   </div>
 </section>
+
+<!-- DOPAMINE CARDS -->
+<section class="dopamine-section reveal">
+  <h2>Dopamine Cards: ADHD Quick Facts</h2>
+  <p id="dopamine-lock-text">🔒 Complete the quiz to unlock the cards.</p>
+  <div class="dopamine-cards locked" id="dopamine-cards">
+    <div class="dopamine-card" onclick="flipCard(this)">
+      <div class="card-inner">
+        <div class="card-front">Click 💡</div>
+        <div class="card-back">ADHD brains seek novelty.</div>
+      </div>
+    </div>
+    <div class="dopamine-card" onclick="flipCard(this)">
+      <div class="card-inner">
+        <div class="card-front">Click 🧠</div>
+        <div class="card-back">Hyperfocus is common with ADHD.</div>
+      </div>
+    </div>
+    <div class="dopamine-card" onclick="flipCard(this)">
+      <div class="card-inner">
+        <div class="card-front">Click ⚡</div>
+        <div class="card-back">ADHD is linked to fast problem-solving.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 <footer>
 © Civics Project – ADHD Awareness | Wait—what were we doin again?
 </footer>
+
 <script>
 const reveals=document.querySelectorAll('.reveal');
 window.addEventListener('scroll',()=>{
@@ -152,7 +258,82 @@ window.addEventListener('scroll',()=>{
     if(r.getBoundingClientRect().top<window.innerHeight-100){r.classList.add('active')}
   })
 });
+
 function flipCard(c){c.classList.toggle('flipped')}
+
+let correctAnswers = 0;
+
+function checkAnswer(button,isCorrect){
+  const feedback=document.getElementById('quiz-feedback');
+
+  if(isCorrect){
+    if(!button.classList.contains('correct')){
+      correctAnswers++;
+    }
+    button.classList.add('correct');
+    feedback.textContent="✅ Nice! That’s correct.";
+  }else{
+    button.classList.add('wrong');
+    feedback.textContent="❌ Not quite — try another one!";
+  }
+
+  button.disabled=true;
+
+  if(correctAnswers>=3){
+    const cards=document.getElementById('dopamine-cards');
+    const lockText=document.getElementById('dopamine-lock-text');
+    cards.classList.remove('locked');
+    lockText.textContent="🎉 Cards unlocked! Click to reveal facts.";
+// Reaction Game Logic
+const reactionBtn=document.getElementById("reactionBtn");
+const reactionResult=document.getElementById("reactionResult");
+
+let reactionStart=0;
+let reactionWaiting=false;
+
+if(reactionBtn){
+  reactionBtn.addEventListener("click",()=>{
+    if(reactionWaiting){
+      reactionResult.textContent="Too early! Wait for green.";
+      reactionBtn.style.background="#4f8cff";
+      reactionWaiting=false;
+      return;
+    }
+
+    reactionResult.textContent="Wait for green...";
+    reactionBtn.style.background="#ff4f4f";
+    reactionWaiting=true;
+
+    const delay=Math.random()*2000+1000;
+
+    setTimeout(()=>{
+      reactionBtn.style.background="#22c55e";
+      reactionResult.textContent="CLICK!";
+      reactionStart=Date.now();
+      reactionWaiting=false;
+
+      reactionBtn.onclick=()=>{
+        const reactionTime=Date.now()-reactionStart;
+        reactionResult.textContent="Your reaction time: "+reactionTime+" ms ⚡";
+
+        // Unlock cards if not already unlocked
+        const cards=document.getElementById('dopamine-cards');
+        const lockText=document.getElementById('dopamine-lock-text');
+        if(cards.classList.contains('locked')){
+          cards.classList.remove('locked');
+          lockText.textContent="🎉 Cards unlocked from the reaction game!";
+        }
+
+        reactionBtn.style.background="#4f8cff";
+        reactionBtn.onclick=null;
+      };
+    },delay);
+  });
+}
+
+  }
+}
 </script>
 </body>
 </html>
+
